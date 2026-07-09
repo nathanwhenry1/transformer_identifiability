@@ -1,0 +1,220 @@
+import AnyLayerIdentifiabilityProof.NLayer.KHead.Step2.TrichotomyInstance
+import AnyLayerIdentifiabilityProof.NLayer.KHead.Induction.InductionStep
+
+set_option autoImplicit false
+
+/-!
+# K-head frontier harness
+
+This file is intentionally not imported by the main library.  It is a live
+index of the API surface used by the remaining K07B/K07C/L7/L8 proof work.
+Run it directly before dispatching or starting a frontier task:
+
+```bash
+lake env lean AnyLayerIdentifiabilityProof/NLayer/KHead/FrontierHarness.lean
+```
+-/
+
+namespace TransformerIdentifiability.NLayer.KHead
+
+/-! ## K06C/K07A inputs -/
+
+#check Step1.step1CommonFirstGates
+#check Step1.Step1CommonFirstGates.sigma
+#check Step1.Step1CommonFirstGates.attention_eq
+#check Step1.Step1CommonFirstGates.attention_unique
+#check Step1.Step1CommonFirstGates.matched_active
+#check Step1.Step1CommonFirstGates.slope_eq
+#check headDialStatement_of_signRegionData
+#check polyInfiniteStatement
+#check signRegionData_signRegionInterface
+#check SignRegionInterface.restrict
+#check signRegionData_signRegionTopologyStatement
+#check SignRegionTopologyStatement.restrict
+
+/-! ## K07B frontier -/
+
+#check TrichotomyLabel
+#check DeeperHead
+#check deeperHeadOrder
+#check deeperHeadOrder_nodup
+#check deeperHeadOrder_length
+#check mem_deeperHeadOrder_iff
+#check succ_head_mem_deeperHeadOrder
+#check processedPrefix
+#check mem_order_of_mem_processedPrefix
+#check getElem_not_mem_processedPrefix_of_nodup
+#check succ_head_mem_processedPrefix_of_layer_lt_getElem_deeperHeadOrder
+#check setLabel
+#check setLabel_eq_on_processedPrefix_of_not_mem
+#check setLabel_eq_on_processedPrefix_of_getElem_nodup
+#check processingInvariant_zero
+#check prop_trichotomy_of_initial_and_step
+#check TrichotomyPredicates
+#check TrichotomyPredicates.Estimate
+#check TrichotomyFormalData
+#check ProcessingInvariantStatement
+#check TrichotomyStepResult
+#check TrichotomyResult
+#check lem_zero_branch_rigidity_S
+#check lem_zero_branch_error_S
+#check lem_trichotomy_step_S
+#check prop_trichotomy_S
+#check QuadraticDialForm
+#check dialEval
+#check continuous_dialEval
+#check isOpen_dialEval_pos
+#check isOpen_dialEval_neg
+#check isOpen_dialEval_ne_zero
+#check dialEval_pos_on_nonzero_component
+#check dialEval_neg_on_nonzero_component
+#check zeroDialForm
+#check dialPredicates
+#check DialEstimate
+#check dialPredicatesWithEstimate
+#check DialEstimate.restrict
+#check eventuallyExpClose_of_expCloseTo
+#check ProcessingInvariantStatement.priorGate_eventuallyExpClose_of_current_getElem
+#check DialEstimate.extend_getElem_of_current_gate
+#check DialEstimate.extend_getElem_subset_of_current_gate
+#check DialEstimate.estimate_one_getElem
+#check DialEstimate.estimate_zero_getElem
+#check DialEstimate.estimate_alpha_getElem
+#check DialEstimate.estimate_alpha_getElem_currentRegion_of_actualProbeSlope_expCloseTo_zero
+#check DialEstimate.estimate_alpha_getElem_currentRegion_of_zeroDialForm_delta
+#check phiHead
+#check phiHeadOfDeeperHead
+#check phiHeadOfDeeperHead_setLabel_eq_of_layer_le
+#check dialFormalData
+#check dialFormalData_Phi_setLabel_eq_of_layer_le
+#check dialFormalData_Lambda_setLabel_eq_of_layer_le
+#check dialEval_phiHead_eq_frozenSlope
+#check dialEval_phiHeadOfDeeperHead_succ_eq_frozenSlope
+#check labelSignLink_dial_restrict_setLabel_getElem_of_mem_processedPrefix
+#check labelSignLink_dial_restrict_setLabel_getElem_of_mem_processedPrefix_deeperHeadOrder
+#check labelSignLink_dialWithEstimate_restrict_setLabel_getElem_of_mem_processedPrefix
+#check labelSignLink_dialWithEstimate_restrict_setLabel_getElem_of_mem_processedPrefix_deeperHeadOrder
+#check mem_processedPrefix_succ_iff_getElem
+#check processingInvariant_dial_setLabel_getElem_of_current_link
+#check trichotomyStepResult_dial_setLabel_getElem_of_current_link
+#check processingInvariant_dialWithEstimate_setLabel_getElem_of_current_link
+#check trichotomyStepResult_dialWithEstimate_setLabel_getElem_of_current_link
+#check positiveBranchComponent_getElem
+#check positiveBranchComponent_getElem_topology
+#check labelSignLink_dial_positiveBranchComponent_getElem
+#check trichotomyStepResult_dial_positiveBranchComponent_getElem
+#check positiveBranchComponent_getElem_topology_withEstimate
+#check labelSignLink_dialWithEstimate_positiveBranchComponent_getElem
+#check trichotomyStepResult_dialWithEstimate_positiveBranchComponent_getElem
+#check negativeBranchComponent_getElem
+#check negativeBranchComponent_getElem_topology
+#check labelSignLink_dial_negativeBranchComponent_getElem
+#check trichotomyStepResult_dial_negativeBranchComponent_getElem
+#check trichotomyStepResult_dial_negativeBranchComponent_getElem_of_estimate
+#check negativeBranchComponent_getElem_topology_withEstimate
+#check labelSignLink_dialWithEstimate_negativeBranchComponent_getElem
+#check trichotomyStepResult_dialWithEstimate_negativeBranchComponent_getElem_of_estimate
+#check lem_trichotomy_step_S_dial_getElem_of_branch_estimates
+#check lem_trichotomy_step_S_dialWithEstimate_getElem_of_branch_estimates
+#check labelSignLink_dial_alpha_getElem_of_zeroDialForm
+#check labelSignLink_dial_alpha_getElem_of_vanishes
+#check trichotomyStepResult_dial_alpha_getElem_of_zeroDialForm
+#check trichotomyStepResult_dial_alpha_getElem_of_vanishes
+#check labelSignLink_dialWithEstimate_alpha_getElem_of_zeroDialForm
+#check labelSignLink_dialWithEstimate_alpha_getElem_of_vanishes
+#check trichotomyStepResult_dialWithEstimate_alpha_getElem_of_zeroDialForm
+#check trichotomyStepResult_dialWithEstimate_alpha_getElem_of_vanishes
+#check lem_zero_branch_rigidity_dial
+#check lem_zero_branch_rigidity_S_instance
+#check TrichotomyResult.dialEval_pos_of_label_one
+#check TrichotomyResult.dialEval_neg_of_label_zero
+#check TrichotomyResult.zeroDialForm_of_label_alpha
+#check TrichotomyResult.dialEval_label_cases
+#check ProcessingInvariantStatement.dialEval_pos_of_label_one_withEstimate
+#check ProcessingInvariantStatement.dialEval_neg_of_label_zero_withEstimate
+#check ProcessingInvariantStatement.zeroDialForm_of_label_alpha_withEstimate
+#check ProcessingInvariantStatement.dialEval_label_cases_withEstimate
+#check ProcessingInvariantStatement.satZeta_hlabel_prefix_of_alpha_estimate
+#check TrichotomyResult.satZeta_hlabel_of_alpha_estimate
+#check TrichotomyResult.tendsto_satZetaActualProbePoint_of_alpha_estimate
+#check dialEval_eq_zero_of_zeroDialForm
+#check tendsto_gate_zero_of_tendsto_neg
+#check tendsto_gate_alpha_of_tendsto_tau_mul_zero
+#check tendsto_satZetaActualProbePoint
+#check tendsto_satZetaActualProbePoint_prefix
+#check tendsto_actualProbeSlope_zero_of_zeroDialForm_prefix
+#check tendsto_tau_mul_actualProbeSlope_of_expCloseTo_zero
+#check expCloseTo_actualProbeSlope_zero_of_zeroDialForm_delta
+#check formalVarPrefixAssignment
+#check eventuallyExpClose_eval_formalPoly_delta_of_formalVarPrefix_lipschitz
+#check expCloseTo_actualProbeGate_first_nondial_of_sep
+#check tendsto_actualProbeSlope_zero_and_tau_mul_of_zeroDialForm_prefix
+#check expCloseTo_actualProbeGate_alpha_of_actualProbeSlope_expCloseTo_zero
+#check expCloseTo_actualProbeGate_one_of_dialEval_pos_prefix
+#check expCloseTo_actualProbeGate_zero_of_dialEval_neg_prefix
+#check DialEstimate.estimate_one_getElem_positiveBranchComponent
+#check DialEstimate.estimate_zero_getElem_negativeBranchComponent
+
+/-! ### K07B.M8/M9 — concrete `prop_trichotomy_S` assembly -/
+
+#check exists_decompose_getElem_deeperHeadOrder
+#check alphaSlope_tendsto_of_processingInvariant_sep
+#check lem_trichotomy_step_S_dialWithEstimate_uniform_of_signRegionData
+#check prop_trichotomy_S_dialWithEstimate_of_signRegionData
+#check trichotomyResult_dialWithEstimate_of_signRegionData
+#check TrichotomyResult.toDialPredicates
+#check TrichotomyResult.toDialPredicates_labels
+#check TrichotomyResult.toDialPredicates_Ustar
+
+/-! ## K07C frontier -/
+
+#check IsSaturatedLabel
+#check SaturatedLabels
+#check trichotomyToSaturatedLabels
+#check trichotomyToSaturatedLabels_eq_of_label
+#check trichotomyToSaturatedLabels_eq_zero_of_label_zero
+#check trichotomyToSaturatedLabels_eq_one_of_label_one
+#check trichotomyToSaturatedLabels_eq_alpha_of_label_alpha
+#check isSaturatedLabel_trichotomyToSaturatedLabels
+#check saturatedC
+#check saturatedTailD
+#check saturatedKLayer
+#check saturatedM
+#check saturatedE
+#check saturatedTailK
+#check SaturatedTailData
+#check unprimedSaturatedLimitVector
+#check primedSaturatedLimitVector
+#check hyp_w_nonzero_S
+#check hyp_w_nonzero_S.left_ne_zero
+#check lem_telescoping_S
+#check lem_telescoping_S.holds
+#check saturatedK_eq_layerProduct
+#check lem_saturated_limit_S
+#check SaturatedLimitAPI
+#check saturatedFirstHeadQuadric
+#check saturatedSlice
+#check saturatedParameterSet
+#check lem_slices_S
+#check firstLayerValuesMatched
+#check prop_first_V_S
+#check SaturatedKCancellationData
+#check SaturatedKCancellationData.K_eq_one
+#check SaturatedKCancellationData.value_eq
+#check SaturatedKCancellationData.skip_eq
+
+/-! ## L7/L8 integration frontier -/
+
+#check firstLayerValuesMatchedForPeeling
+#check firstLayerValuesMatchedForPeeling_of_firstLayerValuesMatched
+#check firstLayerPeelingData_of_valuesMatched
+#check firstLayerPeelingData_of_prop_first_V_S
+#check firstLayerTailReductionData_of_peelingStepResult
+#check LayerValuesMatchableFromAttention
+#check LayerValuesMatchableFromAttention.tail
+#check firstLayerValuesMatchedForPeeling_of_family
+#check openSetInductionInvariantConclusion_driver
+#check thm_open_induction_invariant_of_valuesMatchable
+#check thm_open_induction_invariant_tail_of_valuesMatchable
+
+end TransformerIdentifiability.NLayer.KHead

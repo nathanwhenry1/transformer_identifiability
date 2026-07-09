@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you reference this formalization, please cite it as below."
+title: "Identifiability of deep causal attention-only transformers with skip connections and k heads per layer"
+version: 1.0.0
+authors:
+  - family-names: "Henry"
+    given-names: "Nathan W."
+    affiliation: "Center for Human-Compatible AI, UC Berkeley"
+    email: "nathan.henry@berkeley.edu"
+date-released: 2026-07-09
+license: Apache-2.0
+repository-code: "https://github.com/nathanwhenry1/transformer_identifiability"
+abstract: >-
+  An L-layer attention-only transformer with causal masking, k attention heads
+  per layer, and additive skip connections is identifiable from its input-output
+  map up to a per-layer permutation of its heads: for all parameters outside an
+  explicit finite union of proper algebraic subsets of parameter space, any
+  parameter computing the same function agrees with it, layer by layer, after
+  relabelling the heads within each layer. The per-layer head permutations are
+  exactly the symmetry group of the realization map. This repository contains a
+  complete Lean 4 formalization against Mathlib v4.30.0, extending the
+  single-head formalization it builds on.
+keywords:
+  - "transformer identifiability"
+  - "attention-only transformer"
+  - "multi-head attention"
+  - "Lean 4"
+  - "formal verification"
+  - "algebraic genericity"
