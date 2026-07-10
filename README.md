@@ -1,6 +1,6 @@
-# Identifiability of Attention-Only Transformers with k Heads per Layer
+# Identifiability of attention-only transformers
 
-> **Identifiability of deep causal attention-only transformers with skip connections and k heads per layer**
+> **Identifiability of attention-only transformers**
 >
 > Nathan W. Henry, Center for Human-Compatible AI, UC Berkeley, `nathan.henry@berkeley.edu`
 
