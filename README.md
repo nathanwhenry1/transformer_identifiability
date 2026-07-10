@@ -9,14 +9,13 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 
 This repository contains a complete Lean 4 formalization of an identifiability theorem
-for attention-only transformers with `k` attention heads per layer: for a generic such
+for attention-only transformers with `k` attention heads per layer. The claim is that for a generic such
 network, the merged QK and OV matrices of every head in every layer are determined by
-the function the network computes — exactly, up to the unavoidable symmetry of
-relabelling the `k` heads within each layer.
+the function the network computes, up to known symmetry of permuting the `k` heads within each layer.
 
 It extends the single-head formalization in
 [`attention_only_transformer_identifiability`](https://github.com/nathanwhenry1/attention_only_transformer_identifiability),
-which is included here in full: the `k`-head development builds on the single-head
+which is included here in full. The `k`-head development builds on the single-head
 foundations, and the single-head theorem (`identifiability`) remains available alongside
 the `k`-head theorem (`identifiability_perm`).
 
@@ -68,20 +67,6 @@ TransformerIdentifiability.identifiability_perm :
   [`AnyLayerIdentifiabilityProof/NLayer/KHead/`](AnyLayerIdentifiabilityProof/NLayer/KHead).
 - **For the result statement:** read [`problem_statement.md`](problem_statement.md).
 - **For verification details:** inspect the GitHub Actions run.
-
-## Proof at a glance
-
-The proof is by induction on depth, in the spirit of Fefferman's "Reconstructing a
-neural net from its output" (1994). Complex-analytic continuation in an
-inverse-temperature dial exposes the innermost layer through a tier hierarchy of
-accumulating singularities; with `k` heads per layer the tiers carry `k` competing
-Laurent branches, and a dominance/window-avoidance analysis of the pole arcs matches
-the branches head-by-head, identifying the first layer's attention matrices up to a
-head permutation. Saturated limits of the attention gates and a structural trichotomy
-then recover the value matrices, and a peeling argument relabels the matched heads and
-descends to a network of depth `L − 1`. Genericity throughout is maintained by explicit
-polynomial nonvanishing certificates, so the exceptional set is a finite union of
-proper algebraic subsets — in particular Lebesgue-null.
 
 ## Repository contents
 
@@ -157,7 +142,7 @@ Lean and Mathlib are pinned to `v4.30.0` in `lean-toolchain` and `lake-manifest.
 ```bibtex
 @misc{henry2026identifiabilitykheads,
   author       = {Nathan W. Henry},
-  title        = {Identifiability of deep causal attention-only transformers with skip connections and k heads per layer},
+  title        = {Identifiability of attention-only transformers},
   year         = {2026},
   howpublished = {GitHub repository},
   url          = {https://github.com/nathanwhenry1/transformer_identifiability}
